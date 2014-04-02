@@ -7,16 +7,6 @@
 <title>MVRC Renewal</title>
 <link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/dashboard.css" rel="stylesheet">
-<style>
-
-.jumbotron p {
-font-size:17px
-}
-
-.navbar-inverse .navbar-brand {
-color: #E7E7E7;
-}
-</style>
 </head>
 <body>
  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -36,7 +26,7 @@ color: #E7E7E7;
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          
+        
         </div>
       </div>
     </div>
@@ -45,22 +35,16 @@ color: #E7E7E7;
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="Home.jsp">Overview</a></li>
+            <li><a href="Home.jsp">Overview</a></li>
             <li><a href="New-Application.jsp">Renew Certificate</a></li>
-            <li><a href="View-Transactions.jsp">View Transactions</a></li>
-            
+            <li class="active"><a href="View-Transactions.jsp">View Transactions</a></li>
           </ul>
          
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">MVRC Renewal</h1>
+          <h1 class="page-header">Transaction History</h1>
 
-<div class="jumbotron">
- 
-  <h3>Welcome to the Online Motor Vehicle Registration Certificate Renewal System.</h3>
-  <p><br>This portal offers an easy and convenient way to pay for the renewal of your motor vehicle registration certificate.</p>
-  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
-</div>
+
         </div>
       </div>
     </div>
