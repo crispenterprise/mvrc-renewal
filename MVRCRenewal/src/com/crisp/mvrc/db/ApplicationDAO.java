@@ -1,6 +1,7 @@
 package com.crisp.mvrc.db;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crisp.mvrc.bean.ApplicationBO;
@@ -8,15 +9,16 @@ import com.crisp.mvrc.bean.ApplicationBO;
 
 public class ApplicationDAO extends BaseDAO {
 
-	
+
 	public ApplicationDAO() throws SQLException {
 		super();
 		
 	}
 
 
-	public void insertApplication(ApplicationBO application){
+	public int insertApplication(ApplicationBO application){
 		
+		int last_inserted_id = 0;
 		
 			try {
 				
@@ -35,7 +37,16 @@ public class ApplicationDAO extends BaseDAO {
 				
 					
 					 int count = stmt.executeUpdate();
-				     System.out.println(count + "row(s) affected");
+					 
+					 
+					 ResultSet rs = stmt.getGeneratedKeys();
+					 if(rs.next())
+					 {
+						 last_inserted_id = rs.getInt(1);
+					 }
+		                
+		                
+				     System.out.println(count + "row(s) affected "+last_inserted_id);
 					
 				     stmt.close();
 				
@@ -51,6 +62,9 @@ public class ApplicationDAO extends BaseDAO {
 	
 	            
 			}
+			
+		return last_inserted_id;
+		
 	}
 	
 	
