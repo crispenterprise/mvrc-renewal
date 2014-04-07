@@ -12,6 +12,22 @@ public class ApplicationBO {
 	private String applicationStatus;
 	
 	
+	
+	public ApplicationBO(String applicationNo, int accountNo, String plateNo,
+			int renewalPeriod, Date newRegExpiryDate, String applicationStatus) {
+		super();
+		this.applicationNo = applicationNo;
+		this.accountNo = accountNo;
+		this.plateNo = plateNo;
+		this.renewalPeriod = renewalPeriod;
+		this.newRegExpiryDate = newRegExpiryDate;
+		this.applicationStatus = applicationStatus;
+	}
+	
+	public ApplicationBO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getApplicationNo() {
 		return applicationNo;
 	}
