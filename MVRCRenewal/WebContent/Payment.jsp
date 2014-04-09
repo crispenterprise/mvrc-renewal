@@ -1,7 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.net.*,java.util.*,org.apache.http.*,org.json.*,org.apache.http.client.methods.*, org.apache.http.impl.client.*, org.apache.http.message.*,org.apache.http.client.entity.*,org.apache.commons.lang.StringUtils" %>
- 
 
  <%
 
@@ -56,7 +55,7 @@ if(request.getParameter("submitButton") != null){
 	
 	boolean submittedSuccess = false;
 	if(valid){
-	
+
 		com.crisp.mvrc.dto.ApplicationDTO applicationViewThis = new com.crisp.mvrc.dto.ApplicationDTO();
 		
 		//get this from session
@@ -107,6 +106,7 @@ if(request.getParameter("submitButton") != null){
 
 
 <%!//http://www.jsptut.com/ 
+
 
 boolean submitApplicationAPI(com.crisp.mvrc.dto.ApplicationDTO thisBO){
 	
