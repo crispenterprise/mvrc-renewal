@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.crisp.mvrc.dto.UserAccountDTO;
+
 public class LoginDAO extends BaseDAO {
 
 	public LoginDAO(){
@@ -12,13 +14,13 @@ public class LoginDAO extends BaseDAO {
 	}
 
 	
-	public boolean authenticateUser(String username, String password)
+	public UserAccountDTO authenticateUser(String username, String password)
 	{
 		boolean success = true;
-		
+		UserAccountDTO user = null;
 		PreparedStatement stmt = null;
 	
-			String query = "select * from user_account where username = ? and password = ?";
+		String query = "select * from user_account where username = ? and password = ?";
 		
 			try {
 				
@@ -31,10 +33,17 @@ public class LoginDAO extends BaseDAO {
 				ResultSet result = stmt.executeQuery(query);
 				
 				if(result.next())
-				
+				{	
+					user = new UserAccountDTO();
 					success = true;
-				else
+					user.setAccountNo(result.getInt("account_no"));
+					user.setUserName(result.getString("username"));
+					user.setPassword(result.getString("password"));
+				}
+				else{
 					success = false;
+					user = null;
+				}
 					
 				
 			} catch (SQLException e) {
@@ -44,7 +53,7 @@ public class LoginDAO extends BaseDAO {
 			}
 		
 			
-		return success;
+		return user;
 	}
 	
 	
