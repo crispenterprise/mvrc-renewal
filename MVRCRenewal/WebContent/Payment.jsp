@@ -9,6 +9,8 @@
  
  	String plateNo = (String)request.getSession().getAttribute("plateNo");
 
+ 	String errorMessage = "";
+ 
 	if(StringUtils.isBlank(plateNo)){
 		
 		response.sendRedirect("New-Application.jsp");
@@ -28,16 +30,69 @@ if(request.getParameter("submitButton") != null){
 	
 	formSubmitted = true;
 	
-
-	boolean submittedSuccess = submitApplicationAPI(applicationView);
-
-	if(submittedSuccess){
+	boolean valid = true;
 	
-		debug.append("plateNo: "+plateNo);
-		debug.append("period: "+request.getParameter("period"));
-		//response.sendRedirect("Receipt.jsp");
-		
+	String period = request.getParameter("period");
+	String cardType = request.getParameter("cardType");
+	String cardName = request.getParameter("carName");
+	String cardNumber = request.getParameter("cardNo");
+	String expDate = request.getParameter("expDate");
+	String cvvCode = request.getParameter("cvvCode");
+	
+
+	debug.append("plateNo: "+plateNo);
+	
+	if(StringUtils.isBlank(period)){
+		valid = false;
+	}else if(StringUtils.isBlank(cardName)){
+		valid = false;
+	}else if(StringUtils.isBlank(cardNumber)){
+		valid = false;
+	}else if(StringUtils.isBlank(expDate)){
+		valid = false;
+	}else if(StringUtils.isBlank(cvvCode)){
+		valid = false;
 	}
+	
+	
+	boolean submittedSuccess = false;
+	if(valid){
+	
+		com.crisp.mvrc.app.view.SubmitApplicationView applicationViewThis = new com.crisp.mvrc.app.view.SubmitApplicationView();
+		
+		//get this from session
+		//TODO get the application number
+		applicationViewThis.setAccountNo(9);
+		
+		applicationViewThis.setPlateNo(plateNo);
+		applicationViewThis.setRenewalPeriod(Integer.valueOf(period).intValue());
+		applicationViewThis.setCardType(cardType);
+		applicationViewThis.setCardName(cardName);
+		applicationViewThis.setCardNo(cardNumber);
+		applicationViewThis.setExpDate(expDate);
+		applicationViewThis.setCvvCode(cvvCode);
+		
+				
+		submittedSuccess = submitApplicationAPI(applicationViewThis);
+	
+		if(submittedSuccess){		
+						
+			response.sendRedirect("Receipt.jsp");
+					
+		}else{
+			
+			errorMessage = "Application Failed";
+			
+		}
+		
+	}else{
+		
+		errorMessage = "Please enter all required fields";
+	}
+
+	
+
+	
 	
 	
 
@@ -83,18 +138,47 @@ boolean submitApplicationAPI(com.crisp.mvrc.app.view.SubmitApplicationView thisB
 					
 		//obj.put("plate",thisBO.getPlateNo());			
 		
+		/*
 		obj.put("trn",trn);			
 		obj.put("first_name","John");
 		obj.put("last_name","Doe");
 		obj.put("username","jdoe");
+		*/
 		
-	
+		/*
+		
+		applicationViewThis.setRenewalPeriod(Integer.valueOf(period).intValue());
+		applicationViewThis.setCardType(cardType);
+		applicationViewThis.setCardName(cardName);
+		applicationViewThis.setCardNo(cardNumber);
+		applicationViewThis.setExpDate(expDate);
+		applicationViewThis.setCvvCode(cvvCode);
+		
+		*/
+		
+		/*
+		
 		obj.put("user_account_id",9);
 		obj.put("renewal_period",new Integer(7));
 		obj.put("plate","test44");		
 		obj.put("cost","3000.00");
 		obj.put("creditcard_no","23234342342");
-			
+		
+		*/
+		
+		obj.put("user_account_id", thisBO.getAccountNo());
+		obj.put("renewal_period", thisBO.getRenewalPeriod());
+		obj.put("plate", thisBO.getPlateNo());
+		
+		if(thisBO.getRenewalPeriod() == 6){
+			obj.put("cost", "4000.00");	
+		}else if(thisBO.getRenewalPeriod() == 12){
+			obj.put("cost", "7000.00");
+		}
+		
+		obj.put("creditcard_no", thisBO.getCardNo());
+		
+		
 		
 		
 		System.out.println("JSon Request Parameter: "+obj.toString());
@@ -212,7 +296,18 @@ boolean submitApplicationAPI(com.crisp.mvrc.app.view.SubmitApplicationView thisB
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Application <%= plateNo %></h1>
-          <div style="width:50%">
+
+				<%
+					if (StringUtils.isNotBlank(errorMessage)) {
+				%>
+
+				<div class="alert alert-danger"><%=errorMessage%></div>
+
+				<%
+					}
+				%>
+
+				<div style="width:50%">
           
           
 			<form  METHOD=POST ACTION="Payment.jsp">

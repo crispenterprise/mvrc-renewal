@@ -7,6 +7,8 @@
 //show and hide UI items/and perform actions if the button was clicked
 boolean formSubmitted = false;
 
+String errorMessage = "";
+
 if(request.getParameter("submitButton") == null){
 	
 	formSubmitted = false;
@@ -21,7 +23,9 @@ if(request.getParameter("submitButton") == null){
 	
 	if(StringUtils.isBlank(plateNo)){
 		
-		response.sendRedirect("Verify-Information.jsp");
+		//response.sendRedirect("Verify-Information.jsp");
+		
+		errorMessage = "Plate number required.";
 		
 	}else{
 		
@@ -98,9 +102,23 @@ text-transform: uppercase;
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Application</h1>
-          <div class="alert alert-success" style="display:none"></div>
-          <div class="alert alert-danger" style="display:none"></div>
-          <div style="width:30%">
+          <div class="alert alert-success"  style="display:none"></div>
+
+
+				<%
+					if (StringUtils.isNotBlank(errorMessage)) {
+				%>
+
+				<div class="alert alert-danger"><%=errorMessage%></div>
+
+				<%
+					}
+				%>
+
+
+
+
+				<div style="width:30%">
 
 			<form  METHOD=POST ACTION="New-Application.jsp">
 

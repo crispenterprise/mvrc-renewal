@@ -14,7 +14,11 @@ public class SubmitApplicationView {
 	private Date newRegExpiryDate;
 	private String applicationStatus;
 	
-	
+	private String cardType;
+	private String cardName;
+	private String cardNo;
+	private String expDate;
+	private String cvvCode;
 	
 	
 	
@@ -85,6 +89,46 @@ public class SubmitApplicationView {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+	public String getCardNo() {
+		return cardNo;
+	}
+
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+
+	public String getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
+	}
+
+	public String getCvvCode() {
+		return cvvCode;
+	}
+
+	public void setCvvCode(String cvvCode) {
+		this.cvvCode = cvvCode;
 	}
 	
 	
