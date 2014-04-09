@@ -30,7 +30,7 @@ public class LoginDAO extends BaseDAO {
 				stmt.setString(2, password);
 			
 				
-				ResultSet result = stmt.executeQuery(query);
+				ResultSet result = stmt.executeQuery();
 				
 				if(result.next())
 				{	
