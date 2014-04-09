@@ -52,24 +52,65 @@
           <h1 class="page-header">New Application</h1>
           <div style="width:50%">
 			<form>
+			
+			<div class="panel panel-default">
+		  <div class="panel-heading">Vehicle Details</div>
+		  <div class="panel-body">
+		    <table width="100%">
+		    	<tr>
+		    		<td><b>Make</b><br>Honda</td>
+		    		<td><b>Model</b><br>City</td>
+		    		<td><b>Model</b><br>2012</td>
+		    	</tr>
+		    	<tr>
+		    		<td><b>Engine No.</b><br>7137283212</td>
+		    		<td><b>Chassis No.</b><br>7631yue73</td>
+		    		<td><b>Plate No.</b><br>5040GA</td>
+		    	</tr>
+		    </table>
+		  </div>
+		</div>
+		
 			<div class="panel panel-default">
 		  <div class="panel-heading">Fitness Details</div>
 		  <div class="panel-body">
-		    
+		    <table width="100%">
+		    	<tr>
+		    		<td><b>Issue Date</b><br>01/03/2014</td>
+		    		<td><b>Expiry Date</b><br>01/03/2015</td>
+		    		<td><b>Exam Depot</b><br>Swallowfield Depot - St. Andrew</td>
+		    	</tr>
+		
+		    </table>
 		  </div>
 		</div>
 		
 		<div class="panel panel-default">
-		  <div class="panel-heading">Insurance Details</div>
+		  <div class="panel-heading">Registration Details</div>
 		  <div class="panel-body">
-		    
+		     <table width="50%">
+		    	<tr>
+		    		<td><b>Issue Date</b><br>01/04/2013</td>
+		    		<td><b>Expiry Date</b><br>01/04/2014></td>
+		    		
+		    	</tr>
+		
+		    </table>
 		  </div>
 		</div>
 		
 		<div class="panel panel-default">
-		  <div class="panel-heading">MVRC Details</div>
+		  <div class="panel-heading">Isurance Details</div>
 		  <div class="panel-body">
-		    
+		    <table width="100%">
+		    	<tr>
+		    		<td><b>Insurance Company</b><br>ICWI</td>
+		    		<td><b>Owner's Name</b><br>DOE, JOHN RICHARD</td>
+		    		<td><b>Issue Date</b><br>01/02/2014</td>
+		    		<td><b>Expiry Date</b><br>01/02/2015/td>
+		    	</tr>
+		
+		    </table>
 		  </div>
 		</div>
 		
