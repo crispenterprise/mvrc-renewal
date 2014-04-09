@@ -63,6 +63,7 @@ text-transform: uppercase;
 </head>
 <body>
  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+ 
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -97,8 +98,12 @@ text-transform: uppercase;
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Application</h1>
+          <div class="alert alert-success" style="display:none"></div>
+          <div class="alert alert-danger" style="display:none"></div>
           <div style="width:30%">
+
 			<form  METHOD=POST ACTION="New-Application.jsp">
+
 			<label>Plate Number</label>
 			<input name="plateNo" id="plateNo" type="text" maxlength="6" class="form-control">
 			<br>

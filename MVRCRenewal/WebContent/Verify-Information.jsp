@@ -82,6 +82,8 @@ if(request.getParameter("submitButton") != null){
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Application</h1>
+          <div class="alert alert-success" style="display:none"></div>
+          <div class="alert alert-danger" style="display:none"></div>
           <div style="width:50%">
 			<form  METHOD=POST ACTION="Verify-Information.jsp">
 			
@@ -123,7 +125,7 @@ if(request.getParameter("submitButton") != null){
 		     <table width="50%">
 		    	<tr>
 		    		<td><b>Issue Date</b><br>01/04/2013</td>
-		    		<td><b>Expiry Date</b><br>01/04/2014></td>
+		    		<td><b>Expiry Date</b><br>01/04/2014</td>
 		    		
 		    	</tr>
 		
@@ -139,7 +141,7 @@ if(request.getParameter("submitButton") != null){
 		    		<td><b>Insurance Company</b><br>ICWI</td>
 		    		<td><b>Owner's Name</b><br>DOE, JOHN RICHARD</td>
 		    		<td><b>Issue Date</b><br>01/02/2014</td>
-		    		<td><b>Expiry Date</b><br>01/02/2015/td>
+		    		<td><b>Expiry Date</b><br>01/02/2015</td>
 		    	</tr>
 		
 		    </table>

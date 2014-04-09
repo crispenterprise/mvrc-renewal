@@ -9,7 +9,11 @@
 <link href="css/dashboard.css" rel="stylesheet">
 
 <style>
-
+#tableHead
+{
+	max-width:200%;
+	margin-bottom:30px;
+}
 
 
 </style>
@@ -55,11 +59,23 @@
 			<div class="panel panel-default">
 		  <div class="panel-heading">Payment Receipt</div>
 		  <div class="panel-body">
-		    
+		    <table width="160%" id="tableHead">
+		    	<tr>
+		    		<td><b>Date</b><br>09/04/2014</td>
+		    		<td><b>Receipt #</b><br>5</td>
+		    		
+		    	</tr>
+		    </table>
+		    <table width="50%">
+		    	<tr>
+		    		<td><b>Paid By</b><br>John Doe</td>
+		    		<td><b>Amount</b><br>$8000</td>
+		    		<td><b>Plate No</b><br>5040GA</td>
+		    	</tr>
+		    </table>
 		  </div>
 		</div>
 
-		
 			</div>
 		</div>
       </div>
