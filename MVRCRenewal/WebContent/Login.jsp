@@ -37,7 +37,7 @@
 					request.getSession().setAttribute("user", user);
 					response.sendRedirect("Home.jsp");			
 				}else{
-					errMsg = "Login Failed, Please verify username and password.";
+					errMsg = "Login Failed. Please verify username and password.";
 					request.getSession().setAttribute("user", null);
 				}
 			}
@@ -55,7 +55,7 @@
 	
 	      	<form action="Login.jsp" class="form-signin" method="post">
 		        <h2 class="form-signin-heading">Please sign in</h2>
-		        <input type="text" name="username" class="form-control">
+		        <input type="email" name="username" class="form-control">
 		        <input type="password" name="password" class="form-control">
 		
 		        <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginButton">Sign in</button>
