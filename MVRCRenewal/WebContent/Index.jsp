@@ -25,6 +25,8 @@
 
       <form action="Login" class="form-signin" role="form" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="alert alert-success" style="display:none"></div>
+          <div class="alert alert-danger" style="display:none"></div>
         <input type="email" name="username" class="form-control" placeholder="Email address" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
 
