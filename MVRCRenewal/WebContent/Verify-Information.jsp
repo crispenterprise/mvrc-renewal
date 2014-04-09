@@ -91,7 +91,7 @@
 		     <table width="50%">
 		    	<tr>
 		    		<td><b>Issue Date</b><br>01/04/2013</td>
-		    		<td><b>Expiry Date</b><br>01/04/2014></td>
+		    		<td><b>Expiry Date</b><br>01/04/2014</td>
 		    		
 		    	</tr>
 		
@@ -107,7 +107,7 @@
 		    		<td><b>Insurance Company</b><br>ICWI</td>
 		    		<td><b>Owner's Name</b><br>DOE, JOHN RICHARD</td>
 		    		<td><b>Issue Date</b><br>01/02/2014</td>
-		    		<td><b>Expiry Date</b><br>01/02/2015/td>
+		    		<td><b>Expiry Date</b><br>01/02/2015</td>
 		    	</tr>
 		
 		    </table>
