@@ -38,6 +38,7 @@
             <li><a href="Home.jsp">Overview</a></li>
             <li><a href="New-Application.jsp">Renew Certificate</a></li>
             <li class="active"><a href="View-Transactions.jsp">View Transactions</a></li>
+             <li><a href="View_List_Of_Approved_Payments.jsp">View List Of Approved Payments</a></li>
           </ul>
          
         </div>
