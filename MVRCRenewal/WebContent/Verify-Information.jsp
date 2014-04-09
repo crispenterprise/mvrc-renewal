@@ -1,5 +1,37 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+
+//use this to check if the state of the process
+//show and hide UI items/and perform actions if the button was clicked
+boolean formSubmitted = false;
+
+String plateNo = "";
+
+if(request.getParameter("submitButton") != null){
+	
+	response.sendRedirect("Payment.jsp");
+
+}else if(request.getParameter("submitCancel") != null){
+	
+	response.sendRedirect("Home.jsp");
+	
+	
+}else{
+	
+	plateNo = (String)request.getSession().getAttribute("plateNo");
+
+	if(StringUtils.isBlank(plateNo)){
+		response.sendRedirect("New-Application.jsp");
+	}else{
+		
+	}
+	
+}
+
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,8 +82,10 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">New Application</h1>
+          <div class="alert alert-success" style="display:none"></div>
+          <div class="alert alert-danger" style="display:none"></div>
           <div style="width:50%">
-			<form>
+			<form  METHOD=POST ACTION="Verify-Information.jsp">
 			
 			<div class="panel panel-default">
 		  <div class="panel-heading">Vehicle Details</div>
@@ -65,7 +99,7 @@
 		    	<tr>
 		    		<td><b>Engine No.</b><br>7137283212</td>
 		    		<td><b>Chassis No.</b><br>7631yue73</td>
-		    		<td><b>Plate No.</b><br>5040GA</td>
+		    		<td><b>Plate No.</b><br><%= plateNo %></td>
 		    	</tr>
 		    </table>
 		  </div>
@@ -114,7 +148,7 @@
 		  </div>
 		</div>
 		
-		<button class="btn btn-primary" id="cancel" name="cancel" style="margin-right:7px">Cancel</button> <button class="btn btn-primary" type="submit">Continue</button>
+		<button name="submitCancel"  class="btn btn-primary" id="cancel" name="cancel" style="margin-right:7px">Cancel</button> <button name="submitButton"  class="btn btn-primary" type="submit">Continue</button>
 			</form>
 			</div>
 		</div>

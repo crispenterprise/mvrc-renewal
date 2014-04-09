@@ -1,5 +1,242 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.*,java.net.*,java.util.*,org.apache.http.*,org.json.*,org.apache.http.client.methods.*, org.apache.http.impl.client.*, org.apache.http.message.*,org.apache.http.client.entity.*,org.apache.commons.lang.StringUtils" %>
+
+<jsp:useBean id="applicationView" class="com.crisp.mvrc.app.view.SubmitApplicationView" scope="session"/>
+<jsp:setProperty name="applicationView" property="*"/>  
+ <%
+
+ 
+ 	String plateNo = (String)request.getSession().getAttribute("plateNo");
+
+ 	String errorMessage = "";
+ 
+	if(StringUtils.isBlank(plateNo)){
+		
+		response.sendRedirect("New-Application.jsp");
+		
+	}else{
+		
+	}
+	
+	
+//use this to check if the state of the process
+//show and hide UI items/and perform actions if the button was clicked
+boolean formSubmitted = false;
+
+StringBuffer debug = new StringBuffer();
+
+if(request.getParameter("submitButton") != null){
+	
+	formSubmitted = true;
+	
+	boolean valid = true;
+	
+	String period = request.getParameter("period");
+	String cardType = request.getParameter("cardType");
+	String cardName = request.getParameter("carName");
+	String cardNumber = request.getParameter("cardNo");
+	String expDate = request.getParameter("expDate");
+	String cvvCode = request.getParameter("cvvCode");
+	
+
+	debug.append("plateNo: "+plateNo);
+	
+	if(StringUtils.isBlank(period)){
+		valid = false;
+	}else if(StringUtils.isBlank(cardName)){
+		valid = false;
+	}else if(StringUtils.isBlank(cardNumber)){
+		valid = false;
+	}else if(StringUtils.isBlank(expDate)){
+		valid = false;
+	}else if(StringUtils.isBlank(cvvCode)){
+		valid = false;
+	}
+	
+	
+	boolean submittedSuccess = false;
+	if(valid){
+	
+		com.crisp.mvrc.app.view.SubmitApplicationView applicationViewThis = new com.crisp.mvrc.app.view.SubmitApplicationView();
+		
+		//get this from session
+		//TODO get the application number
+		applicationViewThis.setAccountNo(9);
+		
+		applicationViewThis.setPlateNo(plateNo);
+		applicationViewThis.setRenewalPeriod(Integer.valueOf(period).intValue());
+		applicationViewThis.setCardType(cardType);
+		applicationViewThis.setCardName(cardName);
+		applicationViewThis.setCardNo(cardNumber);
+		applicationViewThis.setExpDate(expDate);
+		applicationViewThis.setCvvCode(cvvCode);
+		
+				
+		submittedSuccess = submitApplicationAPI(applicationViewThis);
+	
+		if(submittedSuccess){		
+						
+			response.sendRedirect("Receipt.jsp");
+					
+		}else{
+			
+			errorMessage = "Application Failed";
+			
+		}
+		
+	}else{
+		
+		errorMessage = "Please enter all required fields";
+	}
+
+	
+
+	
+	
+	
+
+}else if(request.getParameter("submitCancel") != null){
+	
+	formSubmitted = false;
+	response.sendRedirect("Home.jsp");
+	
+	
+}
+
+%>
+
+
+<%!//http://www.jsptut.com/ 
+
+boolean submitApplicationAPI(com.crisp.mvrc.app.view.SubmitApplicationView thisBO){
+	
+
+	boolean appSubmitted = false;
+	
+	StringBuffer result = new StringBuffer();
+	
+	//start action
+	
+	try{
+    	
+    	URL url = null;
+    	   	    	
+    	HttpURLConnection urlConn = null;
+	
+		DataOutputStream output = null;
+
+		DataInputStream input = null;
+				  
+		JSONObject obj=new JSONObject();
+		
+		
+		Random generator = new Random(); 
+		int randomInt = generator.nextInt(10000000) + 1;			
+		String trn = String.valueOf(randomInt);			
+				
+					
+		//obj.put("plate",thisBO.getPlateNo());			
+		
+		/*
+		obj.put("trn",trn);			
+		obj.put("first_name","John");
+		obj.put("last_name","Doe");
+		obj.put("username","jdoe");
+		*/
+		
+		/*
+		
+		applicationViewThis.setRenewalPeriod(Integer.valueOf(period).intValue());
+		applicationViewThis.setCardType(cardType);
+		applicationViewThis.setCardName(cardName);
+		applicationViewThis.setCardNo(cardNumber);
+		applicationViewThis.setExpDate(expDate);
+		applicationViewThis.setCvvCode(cvvCode);
+		
+		*/
+		
+		/*
+		
+		obj.put("user_account_id",9);
+		obj.put("renewal_period",new Integer(7));
+		obj.put("plate","test44");		
+		obj.put("cost","3000.00");
+		obj.put("creditcard_no","23234342342");
+		
+		*/
+		
+		obj.put("user_account_id", thisBO.getAccountNo());
+		obj.put("renewal_period", thisBO.getRenewalPeriod());
+		obj.put("plate", thisBO.getPlateNo());
+		
+		if(thisBO.getRenewalPeriod() == 6){
+			obj.put("cost", "4000.00");	
+		}else if(thisBO.getRenewalPeriod() == 12){
+			obj.put("cost", "7000.00");
+		}
+		
+		obj.put("creditcard_no", thisBO.getCardNo());
+		
+		
+		
+		
+		System.out.println("JSon Request Parameter: "+obj.toString());
+		
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpPost post = new HttpPost("http://localhost:8080/SubmitApplicationAPI/submit_application");
+		
+		CloseableHttpResponse resp = null;
+		
+		
+		 List<NameValuePair> params = new ArrayList<NameValuePair>();
+	     params.add(new BasicNameValuePair("jsondata", obj.toString()));
+		
+	     post.setEntity(new UrlEncodedFormEntity(params));
+            
+	     resp = httpClient.execute(post);
+	     
+	     System.out.println("Status Code:  "+ resp.getStatusLine().getStatusCode());
+	    
+	     if(resp.getStatusLine().getStatusCode() == 200){
+	    	 appSubmitted = true;
+	     }else{
+	    	 appSubmitted = false;
+	     }
+	     
+	     BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+
+	     
+	     
+	     String line = "";
+	     while ((line = rd.readLine()) != null) {
+	         result.append(line);
+	     }
+	     System.out.println("Result: " + result);
+	     
+	    
+	}
+    
+    
+    catch(Exception e){
+			   e.printStackTrace();
+	}		
+	
+	
+	//end action
+	
+	return appSubmitted;
+	
+}%>
+
+
+<%
+	if (formSubmitted) {
+
+	}
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,11 +295,25 @@
          
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">New Application</h1>
-          <div style="width:50%">
-			<form>
+          <h1 class="page-header">New Application <%= plateNo %></h1>
+
+				<%
+					if (StringUtils.isNotBlank(errorMessage)) {
+				%>
+
+				<div class="alert alert-danger"><%=errorMessage%></div>
+
+				<%
+					}
+				%>
+
+				<div style="width:50%">
+          
+          
+			<form  METHOD=POST ACTION="Payment.jsp">
+			
 			<div class="panel panel-default">
-		  <div class="panel-heading">Renewal Period</div>
+		  <div class="panel-heading">Renewal Period <%= debug.toString() %></div>
 		  <div class="panel-body">
 		    <div class="input-group">
 		      
@@ -104,7 +355,7 @@
 		</div>
 		
 		
-		<button class="btn btn-primary" id="cancel" name="cancel" style="margin-right:7px">Cancel</button><button class="btn btn-primary" type="submit">Submit</button>
+		<button  name="submitCancel" class="btn btn-primary" id="cancel" name="cancel" style="margin-right:7px">Cancel</button><button  name="submitButton" class="btn btn-primary" type="submit">Submit</button>
 			</form>
 			</div>
 		</div>
